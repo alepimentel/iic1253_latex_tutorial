@@ -1,0 +1,480 @@
+%!TEX program = xelatex
+\documentclass[10pt,handout]{beamer}
+
+\usetheme{metropolis}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amsfonts,graphicx}
+\usepackage{minted}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\newcommand{\bs}{\textbackslash}
+
+
+\title[\LaTeX\hspace{2em}]{\LaTeX\ for dummies}
+\author[A. Pimentel]{Alejandro Pimentel}
+\date{\today}
+\institute{Pontificia Universidad Católica de Chile}
+
+\begin{document}
+\maketitle
+
+\section{Introducción}
+
+\begin{frame}{Introducción}
+  \begin{center}
+    {\Large ¿Qué es \LaTeX?} \\ \pause
+    \vfill
+    Es un lenguaje de demarcación\footnote{Markup Language.} (como HTML).
+  \end{center}
+\end{frame}
+
+\begin{frame}{¿Por qué \LaTeX?}
+	\begin{itemize}
+    \item El estándar en la comunidad científica\pause
+    \item Orientado a la escritura matemática\pause
+    \item Reutilización de código\pause
+    \item Separación de formato y contenido\pause
+    \item Innumerables librerías para todo\pause
+    \item Referencias y Bibliografía\pause
+    \item Free \& Open Source\pause
+    \item Poner imagenes no arruina los documentos
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Compilador}
+  \begin{block}{Distribuciones}
+    \begin{itemize}
+      \item \href{http://miktex.org}\textbf{MiKTeX} para Windows
+      \item \href{https://www.tug.org/texlive/}\textbf{TeX Live} para Linux y S.O. sobre UNIX
+      \item \href{https://tug.org/mactex/}\textbf{MacTeX} es una redistribución de Tex Live para Mac.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Editores}
+  \begin{block}{Editores}
+    \begin{itemize}
+      \item \textbf{Bloc de Notas} o cualquier editor de texto
+      \item \textbf{\href{http://texstudio.sourceforge.net}{TexStudio}}
+    \end{itemize}
+  \end{block}
+  \begin{exampleblock}{..o editores en línea!}
+    \begin{itemize}
+      \item \href{http://sharelatex.com}{\textbf{ShareLaTeX}}
+      \item \href{http://overleaf.com}{\textbf{Overleaf}}
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Hello World!}
+  \begin{minted}[gobble=2]{latex}
+    \documentclass{article}
+
+    \begin{document}
+        Hello World!
+    \end{document}
+  \end{minted}
+\end{frame}
+
+\section{Basics}
+
+\begin{frame}{Componentes de un documento \LaTeX}
+  \begin{enumerate}
+    \item Document Class
+    \item Preamble
+    \item El documento
+    \item Section, subsection y subsubsection
+    \item Environments
+    \item Comandos
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Document Class}
+  \begin{itemize}
+    \item La primera línea de todos los documentos \LaTeX
+    \item Especifica el tipo del documento
+  \end{itemize}
+  \begin{minted}[gobble=4]{latex}
+    \documentclass{article}
+  \end{minted}
+  Algunos tipos de documento:
+  \begin{tabular}{| l | c |}
+    \hline
+    \textbf{Tipo de documento} & \textbf{Descripción} \\ \hline
+    article & Documentos cortos y artículos de journal\footnote{Y sus tareas.}. \\ \hline
+    report & Documentos largos. \\ \hline
+    book & Libros \\ \hline
+    letter & Cartas \\ \hline
+    beamer\footnote{Como esta presentación} & Presentaciones en Beamer \\ \hline
+  \end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{Preamble}
+  Lo que está entre \emph{documentclass} y el \emph{contenido del documento}\footnote{Ver slide \ref{doc}}.
+  Aquí va:
+  \begin{itemize}
+    \item Paquetes que se deben importar
+    \item Definición de comandos personales
+    \item Configuraciones de paquetes importados
+  \end{itemize}
+  \begin{minted}[gobble=4]{latex}
+    \usepackage{amsmath,amsfonts,graphicx}
+    \usepackage{showexpl,listings}
+    \usepackage[usenames,dvipsnames]{xcolor}
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{El documento (\bs begin\{document\}..)}
+  \label{doc}
+  Es el \emph{environment}\footnote{Ver slide \ref{env}} donde   va el contenido del documento.
+  \begin{minted}[gobble=4]{latex}
+    \begin{document}
+      NO HAY PAN!
+    \end{document}
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Section, subsection y subsubsection}
+  Generalmente organizamos nuestros documentos de manera jerárquica. En \LaTeX, existen los siguientes comandos para separar las distintas partes del documento:
+  \begin{enumerate}
+    \item \bs section
+    \item \bs subsection
+    \item \bs subsubsection
+    \item \bs paragraph
+    \item \bs subparagraph
+  \end{enumerate}
+  \begin{minted}[gobble=4]{latex}
+    \section{Una seccion numerada}
+      Lorem ipsum..
+
+    \section*{Una seccion no numerada}
+      Lorem ipsum..
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Environments}
+  \label{env}
+  Un \emph{environment} define o modifica el formato de su contenido. Este código,
+  \begin{minted}[gobble=4]{latex}
+    \begin{center}
+      Hola, estoy centrado!
+    \end{center}
+  \end{minted}
+  produce lo siguiente:
+  \begin{center}
+    Hola, estoy centrado!
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Comandos}
+  Los comandos sirven para escribir símbolos especiales\footnote{Como los que no están en el teclado} y para muchas otras cosas. Por ejemplo:
+  \begin{minted}[gobble=4]{latex}
+    \textbf{Estoy en negrita.} \\
+    \Large{Soy muy grande!} \\
+    $\hat{a} = \frac{\vec{a}}{|\vec{a}|}$
+    \includegraphics[width=.4\linewidth]{img/appa.jpg}
+  \end{minted}
+  \begin{multicols}{2}
+    \textbf{Estoy en negrita.} \\
+    {\Large Soy muy grande!} \\
+    $\hat{a} = \frac{\vec{a}}{|\vec{a}|}$ \\
+    \begin{center}
+    \includegraphics[width=.4\linewidth]{img/appa.jpg}
+    \end{center}
+  \end{multicols}
+\end{frame}
+
+
+\section{Latex en sus tareas}
+
+\begin{frame}{Math mode}
+  \LaTeX\ facilita la escritura de fórmulas matemáticas, por ejemplo:
+  \begin{equation*}
+    \frac{1}{\displaystyle 1+
+      \frac{1}{\displaystyle 2+
+      \frac{1}{\displaystyle 3+x}}} +
+      \frac{1}{1+\frac{1}{2+\frac{1}{3+x}}}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}[fragile]{Math mode: Inline}
+  La ecuación va en línea con el texto:
+  \begin{minted}[gobble=4]{latex}
+    Sea $\Sigma$ un conjunto de proposiciones en
+    logica proposicional y sea $\phi$ otra
+    proposicion.
+  \end{minted}
+  Sea $\Sigma$ un conjunto de proposiciones en lógica proposicional y sea $\phi$ otra proposición.
+\end{frame}
+
+\begin{frame}[fragile]{Math mode: Display}
+  La ecuación va centrada en una linea aparte:
+  \begin{minted}[gobble=4]{latex}
+    Demuestre que:
+    $$A \cup B = B \cup A$$
+  \end{minted}
+  Demuestre que:
+  $$A \cup B = B \cup A$$
+\end{frame}
+
+\begin{frame}{Algunos símbolos}
+  Todos los símbolos matemáticos están en \LaTeX, aunque generalmente hay que usar paquetes\footnote{Como amsmath, amsfonts o amssymb.}.
+  \begin{multicols}{2}
+    \begin{center}
+      \begin{tabular}{| c | c |}
+        \hline
+        \textbf{Símbolo} & \textbf{Comando} \\ \hline
+        $\alpha$ & \bs alpha \\ \hline
+        $\beta$ & \bs beta \\ \hline
+        $\neg$ & \bs neg \\ \hline
+        $\vee$ & \bs vee \\ \hline
+        $\wedge$ & \bs wedge \\ \hline
+        $\rightarrow$ & \bs rightarrow \\ \hline
+        $\leftarrow$ & \bs leftarrow \\ \hline
+        $\leftrightarrow$ & \bs leftrightarrow \\ \hline
+        $\Leftrightarrow$ & \bs Leftrightarrow \\ \hline
+      \end{tabular}
+      \begin{tabular}{| c | c |}
+        \hline
+        \textbf{Símbolo} & \textbf{Comando} \\ \hline
+        $\forall$ & \bs forall \\ \hline
+        $\exists$ & \bs exists \\ \hline
+        $\in$ & \bs in \\ \hline
+        $\not \in$ & \bs not \bs in \\ \hline
+        $\leq$ & \bs leq \\ \hline
+        $\geq$ & \bs geq \\ \hline
+        $\cup$ & \bs cup \\ \hline
+        $\cap$ & \bs cap \\ \hline
+        $\subset$ & \bs subset \\ \hline
+        $\subseteq$ & \bs subseteq \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{multicols}
+\end{frame}
+
+\begin{frame}{Más símbolos y comandos}
+  \begin{multicols}{2}
+      \begin{center}
+        \begin{tabular}{| c | c |}
+          \hline
+          \multicolumn{2}{| c |}{De tamaño variable} \\ \hline \hline
+          \textbf{Símbolo} & \textbf{Comando} \\ \hline
+          $\sum$ & \bs sum \\ \hline
+          $\prod$ & \bs prod \\ \hline
+          $\int$ & \bs int \\ \hline
+          $\oint$ & \bs oint \\ \hline
+          $\bigcup$ & \bs bigcup \\ \hline
+          $\bigcap$ & \bs bigcap \\ \hline
+          $\bigvee$ & \bs bigvee \\ \hline
+          $\bigwedge$ & \bs bigwedge \\ \hline
+          $\biguplus$ & \bs biguplus \\ \hline
+        \end{tabular}
+        \begin{tabular}{| c | c |}
+          \hline
+          \multicolumn{2}{| c |}{Comandos} \\ \hline \hline
+          \textbf{Acción} & \textbf{Comando} \\ \hline
+          Negrita & \bs textbf \\ \hline
+          Cursiva & \bs textit \\ \hline \hline
+          \multicolumn{2}{| c |}{Font size} \\ \hline \hline
+          \textbf{Tamaño} & \textbf{Comando} \\ \hline
+          Tiny & \bs tiny \\ \hline
+          Small & \bs small \\ \hline
+          Large & \bs large \\ \hline
+          Larger & \bs Large \\ \hline
+          Huge & \bs huge \\ \hline
+        \end{tabular}
+      \end{center}
+  \end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{Simbolos y comandos matemáticos en acción}
+  \begin{enumerate}
+    \item $a_{i+2} =  a_i + a_{i+1}$
+      \pause
+      \begin{minted}[gobble=8]{latex}
+        $a_{i+2} =  a_i + a_{i+1}$
+      \end{minted}
+      \pause
+    \item $a^2 + b^2 = c^2$
+      \pause
+      \begin{minted}[gobble=8]{latex}
+        $a^2 + b^2 = c^2$
+      \end{minted}
+      \pause
+    \item $\{\forall a \in A \mid a \text{ es primo}\}$
+      \pause
+      \begin{minted}[gobble=8]{latex}
+        $\{\forall a \in A \mid a \text{es primo}\}$
+      \end{minted}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Simbolos y comandos matemáticos en acción}
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+    \item $$\sum_{k=0}^{n} k = \frac{n*(n+1)}{2}$$
+      \pause
+      \begin{minted}[gobble=8]{latex}
+        $$\sum_{k=0}^{n} k = \frac{n*(n+1)}{2}$$
+      \end{minted}
+      \pause
+    \item $$f(n) = \begin{cases} 1 & \text{if } n = 0 \\ f(n-1) * n & \text{if } n > 0. \end{cases}$$
+      \pause
+      \begin{minted}[gobble=8]{latex}
+        $$f(n) =
+        \begin{cases}
+          1 & \text{if } n = 0 \\
+          f(n-1) * n & \text{if } n > 0.
+        \end{cases} $$
+      \end{minted}
+  \end{enumerate}
+\end{frame}
+
+
+\section{LaTeX like a boss}
+
+\begin{frame}[fragile]{BibTex}
+  Sirve para manejar referencias. Supongamos que el archivo \emph{refs.bib}\footnote{La base de datos de referencias.} contiene lo siguiente:
+  \begin{minted}[gobble=4]{latex}
+    @article{jlreuttermagic2002,
+      author  = {Juan L. Reutter},
+      title   = {Building a winning Deck},
+      journal = {MtG},
+      year    = {2002}
+    }
+  \end{minted}
+  Para citar esta publicación, hay que poner:
+  \begin{minted}[gobble=4]{latex}
+    \cite{jlreuttermagic2002}
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{..BibTex}
+  Y al final del documento debe ir:
+  \begin{minted}[gobble=4]{latex}
+    \bibliographystyle{acm}
+    \bibliography{refs}
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Un buen código debe estar ordenado (?)}
+  Un documento \LaTeX\ puede estar compuesto por varios archivos distintos.
+  \begin{minted}[gobble=4]{latex}
+    \begin{document}
+      \begin{center}
+        {\huge Tarea 1}
+      \end{center}
+
+      \begin{enumerate}
+        \item Pregunta 1\\
+          \input{p1.tex}
+        \item Pregunta 2\\
+          \input{p2.tex}
+      \end{enumerate}
+    \end{document}
+  \end{minted}
+\end{frame}
+
+
+\section{Environments útiles! :D}
+
+\begin{frame}[fragile]{Array}
+  \begin{minted}[gobble=4]{latex}
+    \begin{equation*}
+      \begin{array}{lcccr}
+        a, b, c & \in & A_1 & \subset & A\\
+        b, d, e, f, g, h & \in & A_2 & \subset & A
+      \end{array}
+    \end{equation*}
+  \end{minted}
+  \begin{equation*}
+    \begin{array}{lcccr}
+      a, b, c & \in & A_1 & \subset & A\\
+      b, d, e, f, g, h & \in & A_2 & \subset & A
+    \end{array}
+  \end{equation*}
+\end{frame}
+
+\begin{frame}[fragile]{Enumerate}
+  \begin{minted}[gobble=4]{latex}
+    \begin{enumerate}
+      \item Soy un item numerado.
+      \item Yo tambien!
+    \end{enumerate}
+  \end{minted}
+  \begin{enumerate}
+    \item Soy un item numerado.
+    \item Yo tambien!
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Itemize}
+  \begin{minted}[gobble=4]{latex}
+    \begin{itemize}
+      \item Solo me dieron un punto ordinario! :(
+      \item También quiero un numero.
+    \end{itemize}
+  \end{minted}
+  \begin{itemize}
+      \item Solo me dieron un punto ordinario! :(
+      \item También quiero un numero.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Tabular}
+  \begin{minted}[gobble=4]{latex}
+    \begin{tabular}{ c | c | c }
+      x & o & x \\ \hline
+      o & x & o \\ \hline
+      o &   &
+    \end{tabular}
+  \end{minted}
+  \begin{center}
+    \begin{tabular}{ c | c | c }
+      x & o & x \\ \hline
+      o & x & o \\ \hline
+      o &   &
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+
+\section{Paquetes útiles}
+
+\begin{frame}[fragile]{Paquetes útiles}
+  \begin{tabular}{ | c | c | }
+    \hline
+    \textbf{Paquete} & \textbf{Qué hace?} \\ \hline
+    amsmath & Facilita la escritura de fórmulas \\ \hline
+    amssymb & Agrega la mayoría de los caracteres matemáticos \\ \hline
+    babel & Cambia el idioma de entrada del documento \LaTeX \\ \hline
+    float & Hace que las imágenes vayan donde uno las pone \\ \hline
+    fullpage & Ajusa los margenes de todos los bordes a 1.5 cm \\ \hline
+  \end{tabular}
+\end{frame}
+
+
+\section{Links útiles}
+
+\begin{frame}{Y cómo hago un backslash? :(}
+  \LARGE{\url{http://detexify.kirelabs.org}}
+\end{frame}
+
+\begin{frame}{Links útiles}
+  \begin{enumerate}
+    \item \url{https://google.com}
+    \item \url{http://sharelatex.com/learn}
+    \item \url{http://tex.stackexchange.com}
+    \item \url{http://en.wikibooks.org/wiki/LaTeX}
+  \end{enumerate}
+\end{frame}
+
+\section{Fin}
+
+\end{document}
